@@ -2,7 +2,7 @@ import connectDB from "../../../../lib/mongodb";
 import User from "../../../../models/User";
 import jwt from "jsonwebtoken";
 
-const JWT_SECRET = process.env.JWT_SECRET || "your-secret-key";
+const JWT_SECRET = "your-secret-key";
 
 export async function POST(request) {
   await connectDB();

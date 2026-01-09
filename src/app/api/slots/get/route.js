@@ -2,7 +2,7 @@ import connectDB from "../../../../lib/mongodb";
 import Slot from "../../../../models/Slot";
 import jwt from "jsonwebtoken";
 
-const JWT_SECRET = process.env.JWT_SECRET || "your-secret-key";
+const JWT_SECRET = "your-secret-key";
 
 export async function GET(request) {
   const authHeader = request.headers.get("authorization");
