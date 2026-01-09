@@ -26,6 +26,11 @@ export async function GET(request) {
     });
   } catch (error) {
     console.error("Get slots error:", error);
+    if (error.name === "JsonWebTokenError" || error.name === "TokenExpiredError") {
+      return new Response(JSON.stringify({ message: "Invalid or expired token" }), {
+        status: 401,
+      });
+    }
     return new Response(JSON.stringify({ message: "Internal server error" }), {
       status: 500,
     });

@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const MONGODB_URI =
-  "mongodb+srv://sinharachit06:CBplp5BrOVNbep7w@cluster0.ujebkn.mongodb.net/?appName=Cluster0";
+  "mongodb+srv://sinharachit06:CBplp5BrOVNbep7w@cluster0.ujebkn.mongodb.net/interview-booking?appName=Cluster0";
 
 if (!global.mongoose) {
   global.mongoose = { conn: null, promise: null };

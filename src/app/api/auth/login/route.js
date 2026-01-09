@@ -7,11 +7,28 @@ const JWT_SECRET = "your-secret-key";
 export async function POST(request) {
   await connectDB();
 
-  const { email, passcode } = await request.json();
+  let { email, passcode } = await request.json();
+
+  // Append @iitg.ac.in if not already present
+  if (email && !email.includes("@")) {
+    email = email + "@iitg.ac.in";
+  }
+
+  // Normalize email to lowercase
+  email = email.toLowerCase().trim();
 
   try {
     const user = await User.findOne({ email });
-    if (!user || !(await user.comparePasscode(passcode))) {
+    if (!user) {
+      console.log(`User not found for email: ${email}`);
+      return new Response(JSON.stringify({ message: "Invalid credentials" }), {
+        status: 401,
+      });
+    }
+
+    const isPasscodeValid = await user.comparePasscode(passcode);
+    if (!isPasscodeValid) {
+      console.log(`Invalid passcode for email: ${email}`);
       return new Response(JSON.stringify({ message: "Invalid credentials" }), {
         status: 401,
       });
